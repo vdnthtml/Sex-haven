@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-deep-charcoal text-pure-white;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-warm-gold text-deep-charcoal px-6 py-3 rounded-lg font-semibold 
+           hover:bg-yellow-400 transition-all duration-200 
+           focus:outline-none focus:ring-2 focus:ring-warm-gold focus:ring-opacity-50;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent border border-pure-white text-pure-white px-6 py-3 rounded-lg font-semibold 
+           hover:bg-pure-white hover:text-deep-charcoal transition-all duration-200 
+           focus:outline-none focus:ring-2 focus:ring-pure-white focus:ring-opacity-50;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent text-pure-white px-4 py-2 rounded-lg font-medium 
+           hover:bg-white hover:bg-opacity-10 transition-all duration-200 
+           focus:outline-none focus:ring-2 focus:ring-pure-white focus:ring-opacity-50;
+  }
+  
+  .nav-link {
+    @apply text-pure-white hover:text-warm-gold transition-colors duration-200 
+           relative after:absolute after:bottom-0 after:left-0 after:h-0.5 
+           after:bg-warm-gold after:w-0 hover:after:w-full after:transition-all after:duration-200;
+  }
+  
+  .nav-link.active {
+    @apply text-warm-gold after:w-full;
+  }
+  
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+  
+  .container-max {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-warm-gold to-yellow-400 bg-clip-text text-transparent;
+  }
+  
+  .glow-effect {
+    @apply shadow-[0_0_20px_rgba(255,199,0,0.3)];
+  }
+  
+  .card {
+    @apply bg-deep-charcoal border border-gray-800 rounded-xl p-6 
+           hover:border-gray-700 transition-all duration-300;
+  }
+  
+  .input-field {
+    @apply bg-deep-charcoal border border-gray-700 rounded-lg px-4 py-3 text-pure-white 
+           placeholder-medium-grey focus:border-warm-gold focus:outline-none 
+           focus:ring-2 focus:ring-warm-gold focus:ring-opacity-50 transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+} 
