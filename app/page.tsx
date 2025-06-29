@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import { motion } from 'framer-motion'
 import { ArrowRight, Play, CheckCircle, Zap, Target, TrendingUp, Users, Star, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
+import EnhancedButton from '@/components/EnhancedButton'
 
 export default function Home() {
   return (
@@ -16,6 +17,8 @@ export default function Home() {
         {/* Background Video Placeholder - Dynamic Visual Narrative */}
         <div className="absolute inset-0 bg-gradient-to-br from-deep-charcoal via-gray-900 to-deep-charcoal">
           <div className="absolute inset-0 bg-black/20"></div>
+          {/* Noise texture background */}
+          <div className="absolute inset-0 bg-noise-texture animate-noise-texture opacity-5"></div>
           {/* Abstract AI Analysis Visualization */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-warm-gold rounded-full animate-pulse"></div>
@@ -43,13 +46,25 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Link href="/signup" className="btn-primary text-lg px-8 py-4 group">
-                Start Analyzing for Free
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+              <Link href="/signup">
+                <EnhancedButton
+                  variant="primary"
+                  size="lg"
+                  className="text-lg px-8 py-4 group"
+                >
+                  Start Analyzing for Free
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                </EnhancedButton>
               </Link>
-              <Link href="/features" className="btn-secondary text-lg px-8 py-4 group">
-                <Play className="mr-2 group-hover:scale-110 transition-transform" size={20} />
-                See How It Works
+              <Link href="/features">
+                <EnhancedButton
+                  variant="secondary"
+                  size="lg"
+                  className="text-lg px-8 py-4 group"
+                >
+                  <Play className="mr-2 group-hover:scale-110 transition-transform" size={20} />
+                  See How It Works
+                </EnhancedButton>
               </Link>
             </div>
           </motion.div>
@@ -95,8 +110,10 @@ export default function Home() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-gray-800/50 to-transparent rounded-2xl p-8 border border-gray-700">
-                <div className="space-y-6">
+              <div className="bg-gradient-to-br from-gray-800/50 to-transparent rounded-2xl p-8 border border-gray-700 relative overflow-hidden">
+                {/* Noise texture background */}
+                <div className="absolute inset-0 bg-noise-texture animate-noise-texture opacity-5 pointer-events-none"></div>
+                <div className="space-y-6 relative z-10">
                   {/* Tangled Network - Data Overload */}
                   <div className="relative h-32 bg-deep-charcoal rounded-lg border border-gray-700 overflow-hidden">
                     <div className="absolute inset-0 flex items-center justify-center">

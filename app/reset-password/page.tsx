@@ -42,7 +42,6 @@ export default function ResetPassword() {
     }
     
     // Handle reset request logic here
-    console.log('Password reset requested for:', formData.email)
     setIsSubmitted(true)
     
     // Simulate email sent - in real app, this would be handled by backend
@@ -87,7 +86,6 @@ export default function ResetPassword() {
     }
     
     // Handle password reset logic here
-    console.log('Password reset completed')
     setIsSubmitted(true)
     
     // Redirect to login after successful reset

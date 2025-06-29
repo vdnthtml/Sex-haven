@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Twitter, Linkedin, Github, Mail, Send } from 'lucide-react'
 import { useState } from 'react'
+import { subscribeToNewsletter } from '@/lib/api'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -39,26 +40,32 @@ const Footer = () => {
     { href: 'https://twitter.com/helixar', icon: Twitter, label: 'Twitter' },
     { href: 'https://linkedin.com/company/helixar', icon: Linkedin, label: 'LinkedIn' },
     { href: 'https://github.com/helixar', icon: Github, label: 'GitHub' },
-    { href: 'mailto:hello@helixar.com', icon: Mail, label: 'Email' },
+    { href: 'mailto:hello@helixar.ai', icon: Mail, label: 'Email' },
   ]
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus('idle')
     
-    // Simulate newsletter signup (replace with actual implementation)
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      await subscribeToNewsletter(email)
       setSubmitStatus('success')
       setEmail('')
       
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000)
-    }, 2000)
+    } catch (error) {
+      setSubmitStatus('error')
+      // Reset error message after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
-    <footer className="bg-deep-charcoal border-t border-gray-800">
+    <footer className="bg-deep-charcoal border-t border-medium-grey">
       <div className="container-max section-padding py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Section */}
@@ -138,7 +145,8 @@ const Footer = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   required
-                  className="w-full px-4 py-3 bg-deep-charcoal border border-medium-grey rounded-lg focus:border-warm-gold focus:outline-none transition-colors text-pure-white placeholder-medium-grey"
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 bg-deep-charcoal border border-medium-grey rounded-lg focus:border-warm-gold focus:outline-none transition-colors text-pure-white placeholder-medium-grey disabled:opacity-50"
                 />
               </div>
               <button
@@ -159,12 +167,12 @@ const Footer = () => {
                 )}
               </button>
               {submitStatus === 'success' && (
-                <p className="text-green-400 text-sm">
+                <p className="text-green-500 text-sm">
                   Successfully subscribed!
                 </p>
               )}
               {submitStatus === 'error' && (
-                <p className="text-red-400 text-sm">
+                <p className="text-alert-red text-sm">
                   Something went wrong. Please try again.
                 </p>
               )}
@@ -173,7 +181,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
+        <div className="border-t border-medium-grey mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-medium-grey text-sm">
               © {currentYear} Helixar. All rights reserved.
